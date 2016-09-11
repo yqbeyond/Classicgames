@@ -12,7 +12,7 @@ python stupid 2048
 
 ## Soduko
 
-Stupid Soduko, **Brute Force**.
+Stupid Soduko, **Brute Force**, maybe use a lot of time.
 
 The program will read the game scheme from `game.txt`. 
 

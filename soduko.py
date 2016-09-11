@@ -1,5 +1,12 @@
+# -*-coding: utf-8 -*-
 
 def init_grid(grid, filename):
+    '''
+    function: init grid
+    params: 
+        grid: the grid to store the array
+        filename: the file name frome where you read the game scheme.
+    '''
     fs = open(filename)
     line = fs.readline().split()
     line = [int(line[i]) for i in range(len(line))]
@@ -10,10 +17,21 @@ def init_grid(grid, filename):
     fs.close()
 
 def print_grid(grid):
+    '''
+    function: show the grid in console
+    params:
+        grid: the grid to be show
+    '''
     for i in range(len(grid)):
         print grid[i]
 
 def solve(grid, selects):
+    '''
+    function: solve the soduko problem
+    params:
+        grid: the grid which be initialized with a game scheme.
+        selects: a 9x9 array, the element of the array is a set, where stores the aviliale number current time.
+    '''
     for i in range(len(grid)):
         for j in range(len(grid[i])):
             i_area = i / 3 * 3
@@ -26,7 +44,13 @@ def solve(grid, selects):
 
     dfs(grid, selects)
 
-def dfs(grid, selects0):
+def dfs(grid, selects):
+    '''
+    function: dfs, brute force solve the problem
+    params:
+        grid: the grid which be initialized with a game scheme.
+        selects: a 9x9 array, the element of the array is a set, where stores the aviliale number current time.
+    '''
     if ok(grid) == True:
         print "\nThe ans is: "
         print_grid(grid)
@@ -55,6 +79,11 @@ def dfs(grid, selects0):
                         
 
 def check(grid):
+    '''
+    function: check wheather every row, col, 3x3 area has the same elements.
+    params:
+        grid: the grid to be checked
+    '''
     for i in range(9):
         rows= [grid[i][j] for j in range(9) if grid[i][j] != 0]
         if len(set(rows)) != len(rows):
@@ -81,7 +110,13 @@ def check(grid):
     '''
 
 def update(selects, i, j, num):
-    
+    '''
+    function: update the current aviliable element set in every cell of the grid
+    params:
+        selects: a 9x9 array, the element of the array is a set, where stores the aviliale number current time, in this function, it while be updated.
+        i, j: position from which which choose a number from selects[i][j] to test
+        num: the num used to be test.
+    '''
     for m in range(9):
         selects[i][m] = selects[i][m].difference(set([num]))
     for m in range(9):
@@ -95,6 +130,12 @@ def update(selects, i, j, num):
             selects[m][n] = selects[m][n].difference(set([num]))
 
 def ok(grid):
+    '''
+    function: check weather  we have solve the problem, return ture only when the problem was solved.
+    params:
+        grid: the grid to be check.
+    '''
+
     for i in range(9):
         if set(grid[i]) != set(range(1,10)):
             return False
@@ -111,6 +152,13 @@ def ok(grid):
 
 
 def recover(selects, i, j, num):
+    '''
+    function: backtrack if the test use number `num` failed.
+    params:
+        selects: a 9x9 array, the element of the array is a set, where stores the aviliale number current time, in this function, it while be recovered.
+        i, j: position, according which we recover the selects.
+        num: use this number to recover.
+    '''
     for m in range(9):
         selects[i][m] = selects[i][m].union(set([num]))
     for m in range(9):
@@ -125,6 +173,9 @@ def recover(selects, i, j, num):
     
 
 if __name__ == "__main__":
+    '''
+    Stupid soduko, use a long time
+    '''
     grid = []
     init_grid(grid, 'game.txt')
     print "Source array is: "

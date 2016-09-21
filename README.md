@@ -19,3 +19,9 @@ The program will read the game scheme from `game.txt`.
 ```
 python soduko.py
 ```
+
+## Sorry
+
+Not a Game, Just for Fun.
+
+A problem From zhihu(知乎) [男友让我打十万个「对不起」，汉字标上多少遍。如何快速实现？](https://www.zhihu.com/question/27229082)
